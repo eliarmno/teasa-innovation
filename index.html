@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TEASA Innovation — SaaS e Soluzioni AI</title>
+    <meta
+      name="description"
+      content="TEASA Innovation: software house per SaaS e soluzioni AI. Dall'idea all'MVP, sviluppo su misura e intelligenza artificiale."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script defer src="./script.js"></script>
+  </head>
+  <body>
+    <div class="video-background-container" aria-hidden="true">
+      <video autoplay loop muted playsinline preload="auto">
+        <source src="videos/gradient-hd-1757940196936.webm" type="video/webm">
+      </video>
+    </div>
+    <header class="navbar">
+      <div class="container">
+        <a href="#" class="logo" aria-label="TEASA Innovation Home"><img src="media/logo.svg" alt="My Software House Logo" style="height: 40px; width: auto;" /></a>
+        <nav aria-label="Navigazione principale">
+          <ul>
+            <li><a href="#startup">Startup</a></li>
+            <li><a href="#sviluppo">Sviluppo Software</a></li>
+            <li><a href="#ai">Soluzioni AI</a></li>
+            <li><a href="#contatti" class="contact-trigger" aria-label="Apri modulo contatti">Contattaci</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container">
+          <h1 id="hero-title">Dicci cosa vuoi costruire</h1>
+          <p class="hero-payoff">Trasforma la tua idea in prodotto con SaaS, AI e design di qualità.</p>
+          <div class="prompt-box" role="group" aria-label="Descrivi il tuo progetto">
+            <textarea
+              id="project-prompt"
+              placeholder="Es: 'Voglio creare un'app per la gestione di palestre con pagamenti integrati e un'area riservata per gli utenti...'"
+              aria-label="Descrizione progetto"
+            ></textarea>
+            <button id="submit-prompt-btn" type="button" aria-label="Invia la tua idea">➔</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="services" aria-labelledby="services-title">
+        <div class="container">
+          <div class="card" id="startup">
+            <h2>Startup</h2>
+            <p>Dall'idea all'MVP, ti aiutiamo a lanciare e scalare la tua impresa.</p>
+            <div class="buttons-grid" aria-label="Servizi per startup">
+              <button type="button">MVP</button>
+              <button type="button">UI/UX Design</button>
+              <button type="button">Seed Stage</button>
+              <button type="button">Growth Hacking</button>
+            </div>
+            <div class="media">
+              <a href="https://helpytravel.com/en" target="_blank" rel="noopener noreferrer">
+                <img
+                  src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fhelpytravel.com%2Fen?w=800"
+                  alt="Anteprima HelpyTravel"
+                />
+              </a>
+            </div>
+            <button class="contact-trigger btn-grad" type="button" aria-label="Contattaci per startup">Contattaci</button>
+          </div>
+
+          <div class="card" id="sviluppo">
+            <h2>Sviluppo Software</h2>
+            <p>Soluzioni software su misura, robuste, scalabili e performanti.</p>
+            <div class="buttons-grid" aria-label="Servizi di sviluppo">
+              <button type="button">Web App</button>
+              <button type="button">Web Site</button>
+              <button type="button">Backend &amp; API</button>
+              <button type="button">Integrazioni</button>
+            </div>
+            <div class="media">
+              <img
+                src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.close.com%2F?w=800"
+                alt="Anteprima Close.com"
+              />
+            </div>
+            <button class="contact-trigger btn-grad" type="button" aria-label="Contattaci per sviluppo software">Contattaci</button>
+          </div>
+
+          <div class="card" id="ai">
+            <h2>Soluzioni AI</h2>
+            <p>Integriamo l'AI per automatizzare e ottimizzare i tuoi processi.</p>
+            <div class="buttons-grid" aria-label="Servizi AI">
+              <button type="button">AI Agents</button>
+              <button type="button">LLM &amp; Chatbot</button>
+              <button type="button">Automazione</button>
+              <button type="button">Data Analysis</button>
+            </div>
+            <div class="media">
+              <img
+                src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fn8n.io%2Fai-agents%2F?w=800"
+                alt="Anteprima n8n AI Agents"
+              />
+            </div>
+            <button class="contact-trigger btn-grad" type="button" aria-label="Contattaci per soluzioni AI">Contattaci</button>
+          </div>
+        </div>
+      </section>
+      <section class="ideas-section" aria-labelledby="ideas-title">
+        <div class="container">
+          <h2 id="ideas-title">Sviluppiamo le tue idee</h2>
+          <p>Dal concetto iniziale al prodotto finale, trasformiamo la tua visione in realtà digitale. Sfruttiamo le tecnologie più avanzate per costruire siti web, applicazioni e soluzioni software performanti, intuitive e su misura per i tuoi obiettivi.</p>
+          <video class="ideas-video" autoplay loop muted playsinline controls preload="auto">
+            <source src="videos/idea-video.mp4" type="video/mp4">
+            <source src="videos/idea-video.mp4.mp4" type="video/mp4">
+          </video>
+        </div>
+      </section>
+      <section class="process-section">
+        <div class="container">
+          <h2 class="section-title">Il nostro processo di sviluppo</h2>
+          <p class="section-subtitle">Seguiamo una roadmap consolidata per trasformare le tue esigenze in soluzioni software di alta qualità, perfettamente allineate ai tuoi obiettivi.</p>
+
+          <div class="timeline-container">
+            <div class="timeline-step">
+              <div class="step-header">
+                <div class="step-number" style="--step-color: #00b8d4;">1</div>
+                <h3 class="step-title">Initiation</h3>
+              </div>
+              <div class="step-description">
+                <p>Iniziamo da te: analizziamo i tuoi obiettivi, raccogliamo i requisiti e definiamo insieme il perimetro del progetto.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="step-header">
+                <div class="step-number" style="--step-color: #26a69a;">2</div>
+                <h3 class="step-title">Design</h3>
+              </div>
+              <div class="step-description">
+                <p>Progettiamo la soluzione: definiamo l'architettura e creiamo un prototipo (UX/UI) che potrai toccare con mano.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="step-header">
+                <div class="step-number" style="--step-color: #8e24aa;">3</div>
+                <h3 class="step-title">Planning</h3>
+              </div>
+              <div class="step-description">
+                <p>Pianifichiamo il successo: stabiliamo tempi e budget chiari e trasparenti, definendo una strategia di gestione dei rischi.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="step-header">
+                <div class="step-number" style="--step-color: #d81b60;">4</div>
+                <h3 class="step-title">Development &amp; Testing</h3>
+              </div>
+              <div class="step-description">
+                <p>Costruiamo il tuo prodotto: il nostro team sviluppa e testa continuamente la soluzione, integrandola con i tuoi sistemi.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="step-header">
+                <div class="step-number" style="--step-color: #e53935;">5</div>
+                <h3 class="step-title">Deployment</h3>
+              </div>
+              <div class="step-description">
+                <p>Lancio e supporto: ti guidiamo nel rilascio finale, formiamo il tuo team e ti forniamo tutta la documentazione necessaria.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-container">
+
+        <div class="footer-column">
+          <h3>TEASA Innovation srl</h3>
+          <p>Trasformiamo le tue idee in soluzioni digitali innovative. Il tuo partner tecnologico per lo sviluppo di software, SaaS e applicazioni AI.</p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Navigazione</h4>
+          <ul>
+            <li><a href="#startup">Startup</a></li>
+            <li><a href="#sviluppo">Sviluppo Software</a></li>
+            <li><a href="#ai">Soluzioni AI</a></li>
+            <li><a href="#contatti">Contattaci</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Contatti</h4>
+          <p>CORSO CASTELFIDARDO 30/A<br>10129 - TORINO (TO)</p>
+          <div class="social-icons">
+            <a href="https://www.linkedin.com/company/teasa-innovation/about/?viewAsMember=true" aria-label="LinkedIn" class="icon-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.784 1.764-1.75 1.764zm13.5 11.268h-3v-5.604c0-1.337-.026-3.059-1.865-3.059-1.867 0-2.154 1.459-2.154 2.966v5.697h-3v-10h2.881v1.367h.041c.401-.759 1.379-1.56 2.84-1.56 3.039 0 3.6 2.002 3.6 4.607v5.586z"/>
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/company/teasa-innovation/about/?viewAsMember=true" aria-label="LinkedIn" class="icon-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .5C5.73.5.98 5.24.98 11.5c0 4.85 3.15 8.96 7.51 10.41.55.1.75-.24.75-.53 0-.26-.01-.94-.01-1.84-3.06.66-3.71-1.31-3.71-1.31-.5-1.26-1.22-1.59-1.22-1.59-.99-.68.08-.66.08-.66 1.09.08 1.66 1.12 1.66 1.12.97 1.66 2.55 1.18 3.17.9.1-.7.38-1.18.68-1.45-2.44-.28-5.01-1.22-5.01-5.42 0-1.2.43-2.18 1.12-2.95-.11-.28-.49-1.4.11-2.91 0 0 .93-.3 3.05 1.13.88-.24 1.82-.36 2.76-.36.94 0 1.88.12 2.76.36 2.12-1.43 3.05-1.13 3.05-1.13.6 1.51.22 2.63.11 2.91.69.77 1.12 1.75 1.12 2.95 0 4.21-2.58 5.14-5.04 5.41.39.34.73 1.02.73 2.06 0 1.49-.01 2.69-.01 3.06 0 .29.2.64.76.53 4.35-1.46 7.5-5.56 7.5-10.41C23.02 5.24 18.27.5 12 .5z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 TEASA Innovation srl | P.IVA 13100310013 | Capitale Sociale: 10.000€ i.v.</p>
+      </div>
+    </footer>
+
+    <div id="contact-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="contact-modal-title">
+      <div class="modal-content" role="document">
+        <span class="close-button" role="button" aria-label="Chiudi" tabindex="0">&times;</span>
+        <h2 id="contact-modal-title">Raccontaci la tua idea</h2>
+        <form id="contact-form">
+          <label for="email">La tua Email:</label>
+          <input type="email" id="email" name="email" required placeholder="nome@azienda.com" />
+          <label for="message">Il tuo Progetto:</label>
+          <textarea id="message" name="message" rows="6" placeholder="Descrivi il tuo progetto..."></textarea>
+          <button type="submit" aria-label="Invia richiesta">Invia Richiesta</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <!-- Sezioni aggiuntive future potranno essere inserite qui -->
+</html>
+
+
