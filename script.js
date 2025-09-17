@@ -141,3 +141,20 @@ navLinks.forEach((link) => {
 
  
 
+// ---------------------
+// Contact Form submit via mailto
+// ---------------------
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const emailInput = document.getElementById('email');
+    const senderEmail = emailInput ? emailInput.value.trim() : '';
+    const description = messageTextarea ? messageTextarea.value.trim() : '';
+    const subject = 'Richiesta info';
+    const body = `Email: ${senderEmail}\nDescrizione: ${description}`;
+    const mailtoLink = `mailto:elia.rmno@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+    closeModal();
+  });
+}
