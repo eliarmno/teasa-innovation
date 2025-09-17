@@ -1,0 +1,15 @@
+# Test locale (vercel dev) o in produzione sostituisci il dominio
+# JSON
+curl -i -X POST http://localhost:3000/api/contact \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Mario Rossi",
+    "email": "mario.rossi@example.com",
+    "message": "Vorrei informazioni sul vostro servizio.",
+    "_honeypot": ""
+  }'
+
+# Esempio produzione
+# curl -i -X POST https://www.teasa-innovation.com/api/contact \
+#   -H "Content-Type: application/json" \
+#   -d '{"name":"Mario Rossi","email":"mario.rossi@example.com","message":"Ciao!","_honeypot":""}'
