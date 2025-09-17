@@ -1,0 +1,79 @@
+// Snippet JS da incollare vicino al submit handler esistente (senza cambiare il markup)
+// Invia i dati a /api/contact via fetch e gestisce lo stato UI
+
+(() => {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  const getInput = (selector) => form.querySelector(selector);
+  const ensureStatusEl = () => {
+    let el = form.querySelector('.form-status');
+    if (!el) {
+      el = document.createElement('div');
+      el.className = 'form-status';
+      el.setAttribute('role', 'status');
+      el.style.marginTop = '8px';
+      el.style.fontSize = '14px';
+      form.appendChild(el);
+    }
+    return el;
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const statusEl = ensureStatusEl();
+
+    const emailEl = getInput('#email');
+    const messageEl = getInput('#message');
+    const nameEl = getInput('#name'); // opzionale, se non esiste usiamo l'email come nome
+
+    const email = emailEl ? emailEl.value.trim() : '';
+    const message = messageEl ? messageEl.value.trim() : '';
+    const name = nameEl && nameEl.value.trim()
+      ? nameEl.value.trim()
+      : (email ? email.split('@')[0] : 'Utente sito');
+
+    const payload = { name, email, message, _honeypot: '' };
+
+    // Disabilita submit e mostra stato
+    let originalText = '';
+    if (submitBtn) {
+      originalText = submitBtn.textContent || '';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Invio in corso...';
+    }
+    statusEl.textContent = '';
+
+    try {
+      const resp = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await resp.json().catch(() => ({}));
+      if (!resp.ok || !data.ok) {
+        throw new Error(data.error || 'Errore durante l\'invio.');
+      }
+      statusEl.textContent = 'Messaggio inviato. Ti risponderemo al più presto.';
+      statusEl.style.color = '#22c55e';
+      form.reset();
+      if (typeof closeModal === 'function') closeModal();
+    } catch (err) {
+      statusEl.textContent = err.message || 'Impossibile inviare il messaggio.';
+      statusEl.style.color = '#f87171';
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText || 'Invia';
+      }
+    }
+  });
+})();
+
+// Fallback (senza JS): se vuoi supportare utenti con JS disabilitato,
+// puoi impostare direttamente sul <form>:
+//   method="POST" action="/api/contact"
+// e assicurarti che i campi abbiano name="name" name="email" name="message".
+// Il backend accetta anche application/x-www-form-urlencoded.
