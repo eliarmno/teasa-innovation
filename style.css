@@ -29,13 +29,15 @@
 .step-number {
   width: 40px;
   height: 40px;
-  line-height: 40px;
   border-radius: 50%;
   background-color: var(--step-color);
   color: #fff;
   font-weight: bold;
   font-size: 1.2em;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   border: 3px solid rgba(0,0,0,0.2);
   position: relative;
   z-index: 2;
@@ -217,11 +219,12 @@ a { color: inherit; text-decoration: none; }
 .preview-item img { border-radius: 12px; border: 1px solid var(--surface-border); display: block; width: 100%; height: 100%; object-fit: cover; }
 
 .card .contact-trigger {
-  margin-top: 8px;
+  margin-top: 12px;
   font-weight: 700;
-  display: block;
-  width: 100%;
+  width: auto;
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 .card .contact-trigger .btn-bg-video { display: none; }
 .card .contact-trigger .btn-label { display: none; }
@@ -246,6 +249,16 @@ a { color: inherit; text-decoration: none; }
   background-position: right center;
   color: #ffffff;
   text-decoration: none;
+}
+
+/* Center CTA inside cards */
+.card .contact-trigger.btn-grad {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 28px;
+  margin: 12px auto 0;
+  width: auto;
 }
 
 /* =====================
@@ -303,8 +316,19 @@ a { color: inherit; text-decoration: none; }
 }
 @media (max-width: 640px) {
   .navbar .container { height: 56px; }
+  .navbar .logo { flex-shrink: 0; }
+  .navbar .logo img { height: 40px; width: auto; }
+  .navbar nav { flex: 1 1 auto; }
+  .navbar nav ul { flex-wrap: wrap; gap: 12px; justify-content: flex-end; }
   .services .container { grid-template-columns: 1fr; }
   .hero { min-height: 70vh; }
+  .prompt-box { grid-template-columns: 1fr; padding: 10px; }
+  #submit-prompt-btn { width: 48px; height: 48px; border-radius: 12px; justify-self: end; }
+  .buttons-grid { grid-template-columns: 1fr; }
+  .card { padding: 20px; }
+}
+@media (max-width: 480px) {
+  .hero-payoff { margin-bottom: 20px; }
 }
 
 /* =====================
