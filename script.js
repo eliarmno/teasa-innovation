@@ -142,19 +142,58 @@ navLinks.forEach((link) => {
  
 
 // ---------------------
-// Contact Form submit via mailto
+// Contact Form submit via API
 // ---------------------
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-  contactForm.addEventListener('submit', (event) => {
+  contactForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const emailInput = document.getElementById('email');
     const senderEmail = emailInput ? emailInput.value.trim() : '';
     const description = messageTextarea ? messageTextarea.value.trim() : '';
-    const subject = 'Richiesta info';
-    const body = `Email: ${senderEmail}\nDescrizione: ${description}`;
-    const mailtoLink = `mailto:elia.rmno@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
-    closeModal();
+    const name = senderEmail ? senderEmail.split('@')[0] : 'Utente sito';
+
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    let originalText = '';
+    if (submitBtn) {
+      originalText = submitBtn.textContent || '';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Invio in corso...';
+    }
+
+    let statusEl = contactForm.querySelector('.form-status');
+    if (!statusEl) {
+      statusEl = document.createElement('div');
+      statusEl.className = 'form-status';
+      statusEl.setAttribute('role', 'status');
+      statusEl.style.marginTop = '8px';
+      statusEl.style.fontSize = '14px';
+      contactForm.appendChild(statusEl);
+    }
+    statusEl.textContent = '';
+
+    try {
+      const resp = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email: senderEmail, message: description, _honeypot: '' })
+      });
+      const data = await resp.json().catch(() => ({}));
+      if (!resp.ok || !data.ok) {
+        throw new Error(data.error || 'Errore durante l\'invio.');
+      }
+      statusEl.textContent = 'Messaggio inviato. Ti risponderemo al più presto.';
+      statusEl.style.color = '#22c55e';
+      contactForm.reset();
+      if (typeof closeModal === 'function') closeModal();
+    } catch (err) {
+      statusEl.textContent = (err && err.message) ? err.message : 'Impossibile inviare il messaggio.';
+      statusEl.style.color = '#f87171';
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText || 'Invia';
+      }
+    }
   });
 }
