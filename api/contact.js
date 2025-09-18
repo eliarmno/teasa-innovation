@@ -15,8 +15,13 @@ const querystring = require('querystring');
 // =====================
 // Config & Rate Limit
 // =====================
-const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minuti
-const RATE_LIMIT_MAX = 6; // per IP
+const envNum = (val, fallback) => {
+  const n = Number(val);
+  return Number.isFinite(n) && n > 0 ? n : fallback;
+};
+const RATE_LIMIT_DISABLED = String(process.env.RATE_LIMIT_DISABLED || '').toLowerCase() === 'true';
+const RATE_LIMIT_WINDOW_MS = envNum(process.env.RATE_LIMIT_WINDOW_MS, 10 * 60 * 1000); // 10 minuti
+const RATE_LIMIT_MAX = envNum(process.env.RATE_LIMIT_MAX, 6); // per IP
 // In-memory store: volatile ed effimero su serverless
 const rateLimitStore = new Map(); // ip -> number[] (timestamps)
 
@@ -40,6 +45,7 @@ const getClientIp = (req) => {
 };
 
 const isRateLimited = (ip) => {
+  if (RATE_LIMIT_DISABLED) return false;
   const now = Date.now();
   const windowStart = now - RATE_LIMIT_WINDOW_MS;
   const timestamps = rateLimitStore.get(ip) || [];
@@ -171,6 +177,7 @@ module.exports = async (req, res) => {
 
     const ip = getClientIp(req);
     if (isRateLimited(ip)) {
+      res.setHeader('Retry-After', Math.ceil(RATE_LIMIT_WINDOW_MS / 1000));
       return sendJson(res, 429, { error: 'Too many requests' });
     }
 
@@ -225,6 +232,5 @@ module.exports = async (req, res) => {
     return sendJson(res, 500, { error: 'Errore interno' });
   }
 };
-
 
 
