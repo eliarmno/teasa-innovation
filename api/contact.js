@@ -161,7 +161,8 @@ const sendViaSmtp = async ({ from, to, replyTo, subject, text }) => {
     secure: Number(SMTP_PORT) === 465,
     auth: { user: SMTP_USER, pass: SMTP_PASS },
   });
-  await transporter.sendMail({ from, to, subject, text, replyTo });
+  const fromAddress = from || SMTP_USER; // fallback mittente SMTP
+  await transporter.sendMail({ from: fromAddress, to, subject, text, replyTo });
   return { ok: true };
 };
 
@@ -205,23 +206,23 @@ module.exports = async (req, res) => {
     if (!isValidEmail(email)) return sendJson(res, 400, { error: 'Email non valida' });
     if (!message) return sendJson(res, 400, { error: 'Il campo message è obbligatorio' });
 
-    const FROM_EMAIL = process.env.FROM_EMAIL;
-    const TO_EMAIL = process.env.TO_EMAIL;
-    if (!TO_EMAIL) return sendJson(res, 500, { error: 'TO_EMAIL non configurata' });
-    if (!FROM_EMAIL) return sendJson(res, 500, { error: 'FROM_EMAIL non configurata' });
+    const PREFERRED_FROM = process.env.FROM_EMAIL || '';
+    const TO_EMAIL = process.env.TO_EMAIL || 'elia.rmno@gmail.com';
+    // Per Resend, se FROM non è impostato usiamo il mittente di onboarding
+    const RESEND_FROM = PREFERRED_FROM || 'Sito Teasa <onboarding@resend.dev>';
 
     const subject = 'Richiesta info';
     const text = buildTextBody({ name, email, message }, ip);
 
     // Prova Resend
-    const resendResult = await sendViaResend({ from: FROM_EMAIL, to: TO_EMAIL, replyTo: email, subject, text });
+    const resendResult = await sendViaResend({ from: RESEND_FROM, to: TO_EMAIL, replyTo: email, subject, text });
     if (resendResult.ok) {
       return sendJson(res, 200, { ok: true });
     }
     console.error('Resend fallito:', resendResult.error);
 
     // Fallback SMTP
-    const smtpResult = await sendViaSmtp({ from: FROM_EMAIL, to: TO_EMAIL, replyTo: email, subject, text });
+    const smtpResult = await sendViaSmtp({ from: PREFERRED_FROM, to: TO_EMAIL, replyTo: email, subject, text });
     if (smtpResult.ok) {
       return sendJson(res, 200, { ok: true });
     }
